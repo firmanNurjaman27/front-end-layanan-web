@@ -1,0 +1,219 @@
+/* ROOT VARIABLES */
+:root {
+    --bg-brown: #8A5A3B; 
+    --text-brown: #7A4E31; /* Sedikit lebih gelap untuk teks konten agar kontras */
+    --logo-green: #4CAF50;
+    --text-dark: #333;
+    --bg-light: #ffffff;
+    --border-color: #dcdcdc;
+    --max-width-container: 1100px;
+    --card-width: 850px; /* Lebar card detail yang lebih mengecil di tengah */
+}
+
+/* RESET & BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* CONTAINER */
+.container {
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 60vh;
+}
+
+/* --- HEADER --- */
+header {
+    background-color: var(--bg-brown);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1.1;
+}
+
+.logo span { color: var(--logo-green); }
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-whatsapp {
+    background-color: #fff;
+    color: var(--text-brown);
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-whatsapp:hover { background-color: #f1f1f1; }
+
+/* --- BACK BUTTON --- */
+.back-action {
+    margin: 30px 0 20px;
+}
+
+.btn-kembali {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e2e2e2;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    gap: 5px;
+    transition: 0.2s;
+}
+
+.btn-kembali:hover {
+    background-color: #d0d0d0;
+}
+
+/* --- DETAIL CARD WRAPPER --- */
+.detail-card-wrapper {
+    max-width: var(--card-width);
+    margin: 0 auto 60px; /* Posisi di tengah */
+}
+
+/* --- DETAIL CARD --- */
+.detail-card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.detail-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.detail-body {
+    padding: 30px 40px;
+}
+
+.detail-body h2 {
+    color: var(--bg-brown);
+    font-size: 22px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.detail-body p {
+    font-size: 15px;
+    color: var(--text-brown);
+    font-weight: 600; /* Ditebalkan sedikit sesuai desain */
+    text-align: justify;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.detail-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--bg-brown);
+}
+
+/* --- ORDER BUTTON --- */
+.action-center {
+    text-align: center;
+}
+
+.btn-pesan {
+    background-color: var(--bg-brown);
+    color: #fff;
+    border: none;
+    padding: 12px 50px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-pesan:hover {
+    background-color: #71482f;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: var(--bg-brown);
+    color: #fff;
+    padding: 50px 20px 20px;
+    font-size: 14px;
+}
+
+.footer-inner {
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.contact-row { display: flex; margin-bottom: 5px; }
+.contact-row span { width: 90px; flex-shrink: 0; }
+.d-flex { display: flex; }
+
+.footer-social strong { display: block; margin-bottom: 10px; }
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 13px;
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+}
+
+/* --- RESPONSIVE DESIGN (MOBILE) --- */
+@media (max-width: 768px) {
+    .header-inner { flex-direction: column; gap: 15px; }
+    .detail-card img { height: 250px; }
+    .detail-body { padding: 20px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+    .btn-pesan { width: 100%; } /* Tombol memenuhi lebar di layar kecil */
+}

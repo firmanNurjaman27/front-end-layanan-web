@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinasi - Ngulisik Tour</title>
+    <link rel="stylesheet" href="css/destinasi.css">
+    <style>
+        a.card { text-decoration: none; color: inherit; transition: transform 0.2s; display: flex; flex-direction: column;}
+        a.card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo"><span>NT</span> NGULISIK<br>TOUR</div>
+            <nav>
+                <a href="index.html">HOME</a>
+                <a href="destinasi.html">DESTINASI</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-title">
+            <a href="index.html" class="back-arrow">&larr;</a>
+            <h1>DESTINASI</h1>
+        </div>
+
+        <form class="search-container" id="search-form">
+            <input type="text" id="search-input" placeholder="Cari Destinasi">
+            <button type="submit">CARI</button>
+        </form>
+
+        <div class="grid-cards" id="destinasi-container">
+            <p>Loading data...</p>
+        </div>
+    </main>
+
+    <script>
+        function formatRupiah(angka) {
+            return "RP. " + new Intl.NumberFormat('id-ID').format(angka);
+        }
+
+        // Fungsi fetch utama yang bisa menerima parameter query (search)
+        async function fetchSemuaDestinasi(searchQuery = '') {
+            const container = document.getElementById('destinasi-container');
+            container.innerHTML = '<p>Loading data...</p>';
+
+            // Endpoint API. Jika ada search, tambahkan parameter ?search=keyword
+            let API_URL = 'https://api.domainanda.com/destinasi';
+            if(searchQuery !== '') {
+                API_URL += `?search=${encodeURIComponent(searchQuery)}`;
+            }
+
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Gagal mengambil data');
+                
+                const data = await response.json();
+                container.innerHTML = '';
+
+                if(data.length === 0) {
+                    container.innerHTML = '<p>Destinasi tidak ditemukan.</p>';
+                    return;
+                }
+
+                data.forEach(item => {
+                    const cardHTML = `
+                        <a href="detail.html?id=${item.id}" class="card">
+                            <img src="${item.gambar}" alt="${item.nama}">
+                            <div class="card-body">
+                                <h3>${item.nama}</h3>
+                                <p>${item.deskripsi.substring(0, 150)}...</p>
+                                <div class="card-price">${formatRupiah(item.harga)}</div>
+                            </div>
+                        </a>
+                    `;
+                    container.innerHTML += cardHTML;
+                });
+
+            } catch (error) {
+                console.error("Error:", error);
+                container.innerHTML = '<p style="color:red;">Gagal memuat data API.</p>';
+            }
+        }
+
+        // Event saat form pencarian disubmit
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah halaman reload
+            const keyword = document.getElementById('search-input').value;
+            fetchSemuaDestinasi(keyword); // Panggil ulang API dengan keyword
+        });
+
+        // Panggil pertama kali saat halaman dibuka tanpa keyword
+        window.onload = () => fetchSemuaDestinasi('');
+    </script>
+</body>
+</html>

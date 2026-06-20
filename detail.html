@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Destinasi</title>
+    <link rel="stylesheet" href="css/destinasi1.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo"><span>NT</span> NGULISIK<br>TOUR</div>
+            <nav>
+                <a href="index.html">HOME</a>
+                <a href="destinasi.html">DESTINASI</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="back-action">
+            <a href="destinasi.html" class="btn-kembali">&larr; KEMBALI</a>
+        </div>
+
+        <div class="detail-card-wrapper" id="detail-container">
+            <p>Loading detail destinasi...</p>
+        </div>
+    </main>
+
+    <script>
+        function formatRupiah(angka) {
+            return "RP. " + new Intl.NumberFormat('id-ID').format(angka);
+        }
+
+        async function fetchDetailDestinasi() {
+            const container = document.getElementById('detail-container');
+            
+            // 1. Ambil Parameter ID dari URL (Misal: detail.html?id=2)
+            const urlParams = new URLSearchParams(window.location.search);
+            const idDestinasi = urlParams.get('id');
+
+            // Jika tidak ada ID di URL, kembalikan ke halaman destinasi
+            if(!idDestinasi) {
+                window.location.href = 'destinasi.html';
+                return;
+            }
+
+            // 2. Tembak API berdasarkan ID tersebut
+            const API_URL = `https://api.domainanda.com/destinasi/${idDestinasi}`;
+
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Data tidak ditemukan');
+                
+                // Asumsi backend merespon dengan 1 Object JSON data
+                const detail = await response.json();
+                
+                // Ubah Title halaman tab browser
+                document.title = detail.nama + " - Ngulisik Tour";
+
+                // 3. Render HTML dengan data dari API
+                container.innerHTML = `
+                    <div class="detail-card">
+                        <img src="${detail.gambar}" alt="${detail.nama}">
+                        <div class="detail-body">
+                            <h2>${detail.nama}</h2>
+                            <p>${detail.deskripsi}</p>
+                            <div class="detail-price">${formatRupiah(detail.harga)}</div>
+                        </div>
+                    </div>
+
+                    <div class="action-center">
+                        <a href="https://wa.me/628123456789?text=Halo,%20saya%20pesan%20tiket%20${detail.nama}" target="_blank">
+                            <button class="btn-pesan">Pesan via WhatsApp</button>
+                        </a>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error("Error:", error);
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 50px;">
+                        <h3>Destinasi tidak ditemukan.</h3>
+                        <a href="destinasi.html">Kembali ke daftar destinasi</a>
+                    </div>
+                `;
+            }
+        }
+
+        window.onload = fetchDetailDestinasi;
+    </script>
+</body>
+</html>
