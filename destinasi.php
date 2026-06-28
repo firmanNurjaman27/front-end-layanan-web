@@ -1,14 +1,22 @@
 <?php 
-require_once 'data.php'; 
+require_once 'config.php'; 
 
-// Logika Pencarian sederhana
+// Logika Pencarian dari database
 $search = isset($_GET['search']) ? $_GET['search'] : '';
-$filtered_destinasi = $data_destinasi;
+$search_escaped = $conn->real_escape_string($search);
 
-if($search) {
-    $filtered_destinasi = array_filter($data_destinasi, function($item) use ($search) {
-        return stripos($item['nama'], $search) !== false;
-    });
+$sql = "SELECT * FROM destinasi";
+if($search !== '') {
+    $sql .= " WHERE nama LIKE '%$search_escaped%'";
+}
+$sql .= " ORDER BY id DESC";
+
+$result = $conn->query($sql);
+$filtered_destinasi = [];
+if ($result && $result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $filtered_destinasi[] = $row;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -31,6 +39,8 @@ if($search) {
             <nav>
                 <a href="index.php">HOME</a>
                 <a href="destinasi.php">DESTINASI</a>
+                <a href="login.php">LOGIN</a>
+                <a href="register.php">REGISTER</a>
                 <a href="#" class="btn-whatsapp">WhatsApp</a>
             </nav>
         </div>
@@ -52,16 +62,16 @@ if($search) {
             <?php if(count($filtered_destinasi) > 0): ?>
                 <?php foreach($filtered_destinasi as $item): ?>
                     <a href="detail.php?id=<?= $item['id'] ?>" class="card">
-                        <img src="<?= $item['gambar'] ?>" alt="<?= $item['nama'] ?>">
+                        <img src="<?= htmlspecialchars($item['gambar']) ?>" alt="<?= htmlspecialchars($item['nama']) ?>">
                         <div class="card-body">
-                            <h3><?= $item['nama'] ?></h3>
-                            <p><?= $item['deskripsi'] ?></p>
+                            <h3><?= htmlspecialchars($item['nama']) ?></h3>
+                            <p><?= htmlspecialchars($item['deskripsi']) ?></p>
                             <div class="card-price"><?= format_rupiah($item['harga']) ?></div>
                         </div>
                     </a>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Destinasi tidak ditemukan.</p>
+                <p style="grid-column: 1/-1; text-align: center; color: #888; padding: 20px;">Destinasi tidak ditemukan.</p>
             <?php endif; ?>
         </div>
 

@@ -1,13 +1,13 @@
 /* ROOT VARIABLES */
 :root {
     --bg-brown: #8A5A3B; 
-    --text-brown: #7A4E31;
+    --text-brown: #7A4E31; /* Sedikit lebih gelap untuk teks konten agar kontras */
     --logo-green: #4CAF50;
     --text-dark: #333;
     --bg-light: #ffffff;
     --border-color: #dcdcdc;
     --max-width-container: 1100px;
-    --card-width: 850px;
+    --card-width: 850px; /* Lebar card detail yang lebih mengecil di tengah */
 }
 
 /* RESET & BASE */
@@ -22,9 +22,6 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
 /* CONTAINER */
@@ -32,7 +29,7 @@ body {
     max-width: var(--max-width-container);
     margin: 0 auto;
     padding: 0 20px;
-    flex: 1;
+    min-height: 60vh;
 }
 
 /* --- HEADER --- */
@@ -79,7 +76,7 @@ nav a {
 
 .btn-whatsapp {
     background-color: #fff;
-    color: var(--text-brown) !important;
+    color: var(--text-brown);
     padding: 8px 24px;
     border-radius: 20px;
     font-weight: bold;
@@ -114,7 +111,7 @@ nav a {
 /* --- DETAIL CARD WRAPPER --- */
 .detail-card-wrapper {
     max-width: var(--card-width);
-    margin: 0 auto 60px;
+    margin: 0 auto 60px; /* Posisi di tengah */
 }
 
 /* --- DETAIL CARD --- */
@@ -148,8 +145,7 @@ nav a {
 .detail-body p {
     font-size: 15px;
     color: var(--text-brown);
-    font-weight: 600;
-    font-style: italic;
+    font-weight: 600; /* Ditebalkan sedikit sesuai desain */
     text-align: justify;
     line-height: 1.6;
     margin-bottom: 25px;
@@ -158,7 +154,7 @@ nav a {
 .detail-price {
     font-size: 24px;
     font-weight: bold;
-    color: var(--logo-green);
+    color: var(--bg-brown);
 }
 
 /* --- ORDER BUTTON --- */
@@ -188,7 +184,6 @@ footer {
     color: #fff;
     padding: 50px 20px 20px;
     font-size: 14px;
-    margin-top: auto;
 }
 
 .footer-inner {
@@ -198,10 +193,6 @@ footer {
     grid-template-columns: 1fr 1.5fr 1fr;
     gap: 30px;
     margin-bottom: 30px;
-}
-
-.footer-logo-section .logo {
-    font-size: 20px;
 }
 
 .contact-row { display: flex; margin-bottom: 5px; }
@@ -218,123 +209,11 @@ footer {
     margin: 0 auto;
 }
 
-/* ======================================
-   MODAL RESERVASI
-   ====================================== */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.modal-overlay.active {
-    display: flex;
-}
-
-.modal-content {
-    background: #fff;
-    border-radius: 12px;
-    padding: 30px;
-    max-width: 620px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    animation: modalSlideIn 0.3s ease;
-}
-
-@keyframes modalSlideIn {
-    from { transform: translateY(-30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-close {
-    position: absolute;
-    top: 12px; right: 16px;
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: #999;
-    cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s;
-}
-.modal-close:hover { color: #333; }
-
-.modal-content h3 {
-    margin-bottom: 5px;
-    color: var(--bg-brown);
-    font-size: 20px;
-    border-bottom: 2px solid var(--bg-brown);
-    padding-bottom: 8px;
-}
-
-.modal-dest-name {
-    color: var(--logo-green) !important;
-    font-weight: bold !important;
-    font-style: normal !important;
-    font-size: 16px !important;
-    margin-bottom: 20px !important;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-.form-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    font-size: 13px;
-    color: #333;
-}
-.form-group input,
-.form-group textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: inherit;
-}
-.form-group textarea {
-    resize: vertical;
-}
-
-.btn-submit-booking {
-    background: var(--bg-brown);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-    width: 100%;
-    transition: background 0.3s;
-}
-.btn-submit-booking:hover {
-    background: #71482f;
-}
-
 /* --- RESPONSIVE DESIGN (MOBILE) --- */
 @media (max-width: 768px) {
     .header-inner { flex-direction: column; gap: 15px; }
     .detail-card img { height: 250px; }
     .detail-body { padding: 20px; }
     .footer-inner { grid-template-columns: 1fr; gap: 40px; }
-    .btn-pesan { width: 100%; }
-    .form-row { grid-template-columns: 1fr; }
-    .modal-content { padding: 20px; }
+    .btn-pesan { width: 100%; } /* Tombol memenuhi lebar di layar kecil */
 }
