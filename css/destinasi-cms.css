@@ -1,0 +1,232 @@
+/* destinasi-cms.css - Khusus untuk halaman kelola destinasi */
+
+.destinasi-header {
+    margin-bottom: 20px;
+}
+.destinasi-header .section-title {
+    color: #8D5C3E;
+    font-size: 20px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background: #E8E8E8;
+    border-radius: 4px;
+    width: 250px;
+    font-size: 14px;
+}
+.btn-brown {
+    background: transparent;
+    color: #8D5C3E;
+    border: 2px solid #8D5C3E;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.2s;
+}
+.btn-brown:hover {
+    background: #8D5C3E;
+    color: white;
+}
+
+.section-block {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.block-title {
+    color: #8D5C3E;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.form-box {
+    border: 2px solid #8D5C3E;
+    border-radius: 8px;
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+}
+
+.destinasi-form {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+    align-items: flex-start;
+}
+.form-group-cms {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.form-group-cms label {
+    font-weight: bold;
+    color: #8D5C3E;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+.form-group-cms input {
+    border: none;
+    border-bottom: 2px solid #8D5C3E;
+    padding: 8px 0;
+    font-size: 14px;
+    background: transparent;
+    outline: none;
+}
+
+.form-right {
+    display: flex;
+    flex-direction: column;
+}
+.form-right label {
+    font-weight: bold;
+    color: #8D5C3E;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+.upload-area {
+    border: 1px solid #ccc;
+    background: #EAEAEA;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+.upload-area input[type=file] {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+}
+.upload-area::after {
+    content: "Upload Gambar";
+    color: #666;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.form-action-bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Galeri Form */
+.galeri-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.upload-area-large {
+    border: 1px solid #ccc;
+    background: #EAEAEA;
+    width: 400px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.upload-area-large input[type=file] {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+}
+.upload-area-large::after {
+    content: "Upload Gambar Galeri";
+    color: #666;
+    font-size: 16px;
+    pointer-events: none;
+}
+.form-action-center {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* SOLID BUTTONS */
+.btn-brown-solid {
+    background: #8D5C3E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-brown-solid:hover { background: #71482f; }
+
+.btn-red-solid {
+    background: #FF0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-red-solid:hover { background: #cc0000; }
+
+.btn-green-solid {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-green-solid:hover { background: #3e8e41; }
+
+.btn-dark-solid {
+    background: #333333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-dark-solid:hover { background: #111111; }
+
+.btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+}
+.btn-action.edit-btn {
+    color: #8D5C3E;
+}
+.btn-action.delete-btn {
+    color: #8D5C3E;
+}
